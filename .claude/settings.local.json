@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --yes)",
+      "Bash(npx create-next-app:*)",
+      "Bash(npm install:*)",
+      "Bash(node -e:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "WebFetch(domain:skypeo.fr)",
+      "WebFetch(domain:godly.website)",
+      "WebFetch(domain:orbitaix.webflow.io)",
+      "WebFetch(domain:wearestokt.com)",
+      "WebFetch(domain:labs.anyflow.agency)",
+      "Bash(__NEW_LINE_30d550d139b3e533__ sed -i 's/pt-32/pt-16/g; s/pt-40/pt-20/g' /c/Users/monke/Desktop/site_skypeo_v2/src/app/automatisations/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/blog/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/contact/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/mentions-legales/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/sites-web/page.tsx)"
+    ]
+  }
+}
