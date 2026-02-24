@@ -13,15 +13,19 @@ const doubled = [...items, ...items];
 
 export function Marquee() {
   return (
-    <div className="border-y border-violet-deep/30 dark:border-violet-deep/40 py-4 overflow-hidden select-none">
+    <div
+      className="py-4 overflow-hidden select-none"
+      style={{ borderTop: "1px solid rgba(0,143,120,0.15)", borderBottom: "1px solid rgba(0,143,120,0.15)" }}
+    >
       <div className="flex animate-marquee will-change-transform gap-0">
         {doubled.map((item, i) => (
           <span
             key={i}
-            className="flex items-center gap-6 pl-6 text-[11px] font-bold uppercase tracking-[0.2em] text-violet-mid/60 dark:text-violet-mid/50 whitespace-nowrap"
+            className="flex items-center gap-6 pl-6 text-[11px] font-bold uppercase tracking-[0.2em] whitespace-nowrap"
+            style={{ color: "rgba(0,143,120,0.55)" }}
           >
             {item}
-            <span className="text-rose text-[8px]">✦</span>
+            <span style={{ color: "#2b3475", fontSize: "8px" }}>✦</span>
           </span>
         ))}
       </div>

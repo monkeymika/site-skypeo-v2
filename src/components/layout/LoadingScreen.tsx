@@ -48,7 +48,7 @@ export function LoadingScreen() {
           key="loader"
           exit={{ y: "-100%", transition: { duration: 0.85, ease: anyflow } }}
           className="fixed inset-0 z-[200] flex flex-col items-center justify-center overflow-hidden"
-          style={{ background: "#0D0A1A" }}
+          style={{ background: "#0b0117" }}
         >
           {/* Grid */}
           <div className="hero-grid absolute inset-0 opacity-30 pointer-events-none" />
@@ -59,7 +59,7 @@ export function LoadingScreen() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2 }}
-            style={{ background: "radial-gradient(ellipse 65% 55% at 50% 50%, rgba(123,47,190,0.14) 0%, transparent 70%)" }}
+            style={{ background: "radial-gradient(ellipse 65% 55% at 50% 50%, rgba(0,143,120,0.14) 0%, transparent 70%)" }}
           />
 
           {/* ── Logo letters ───────────────────────── */}
@@ -95,11 +95,11 @@ export function LoadingScreen() {
               transition={{ delay: 0.7, duration: 0.5, ease: anyflow }}
               className="flex items-center justify-center gap-3 mt-3"
             >
-              <div className="h-px w-10 bg-gradient-to-r from-transparent to-violet-mid" />
-              <span className="text-[9px] font-bold uppercase tracking-[0.35em] text-violet-mid">
+              <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#008f78]" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#008f78]">
                 Digitalisation & Automatisation
               </span>
-              <div className="h-px w-10 bg-gradient-to-l from-transparent to-violet-mid" />
+              <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#008f78]" />
             </motion.div>
           </div>
 
@@ -123,7 +123,7 @@ export function LoadingScreen() {
             {/* Track */}
             <div className="h-[1px] w-full bg-white/10 overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-[#7B2FBE] to-[#E91E8C]"
+                className="h-full bg-gradient-to-r from-[#008f78] to-[#2b3475]"
                 style={{ width: `${count}%`, transition: "width 0.06s linear" }}
               />
             </div>

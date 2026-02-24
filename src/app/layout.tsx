@@ -1,23 +1,26 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Plus_Jakarta_Sans } from "next/font/google";
+import { Orbitron, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { LoadingScreen } from "@/components/layout/LoadingScreen";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { ThreeBackground } from "@/components/ui/ThreeBackground";
 
-const bebas = Bebas_Neue({
-  weight: "400",
+/* Orbitron — headings. Maps to --font-syne (= font-bebas in Tailwind for Navbar compat) */
+const syne = Orbitron({
   subsets: ["latin"],
-  variable: "--font-bebas",
+  variable: "--font-syne",
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
+/* Inter — body text */
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-jakarta",
-  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -73,11 +76,12 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${bebas.variable} ${jakarta.variable}`}
+      className={`${syne.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen flex flex-col">
         <ThemeProvider>
+          <ThreeBackground />
           <CustomCursor />
           <LoadingScreen />
           <Navbar />
