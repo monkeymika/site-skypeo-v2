@@ -131,14 +131,14 @@ export function Navbar() {
               </span>
             </Link>
 
-            {/* Divider */}
-            <span className="block w-px h-6 rounded-full bg-white/[0.08]" />
+            {/* Divider — masqué sous 600px car Contact/Toggle disparaissent */}
+            <span className="max-[600px]:hidden block w-px h-6 rounded-full bg-white/[0.08]" />
 
             {/* ── Right: Contact ────────────────────────── */}
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
-              className="pl-4 pr-4 py-3 rounded-[1.75rem] text-[15px] font-medium
+              className="max-[600px]:hidden pl-4 pr-4 py-3 rounded-[1.75rem] text-[15px] font-medium
                        text-white/80 transition-all duration-200
                        hover:text-white hover:bg-white/[0.07] active:bg-white/[0.11]"
               style={{ border: "1px solid rgba(255,255,255,0.14)" }}
@@ -147,7 +147,7 @@ export function Navbar() {
             </Link>
 
             {/* Theme toggle inside pill */}
-            <div className="ml-2 mr-0 pl-0">
+            <div className="max-[600px]:hidden ml-2 mr-0 pl-0">
               <ThemeToggle />
             </div>
           </div>
@@ -246,7 +246,7 @@ export function Navbar() {
                               ? "gradient-text"
                               : "text-white/60 group-hover:text-white"
                           }`}
-                          style={{ fontSize: "clamp(2.4rem, 6.5vw, 5.5rem)" }}
+                          style={{ fontSize: "clamp(2.4rem, 6.5vw, 4.2rem)" }}
                         >
                           {label}
                         </span>
@@ -267,6 +267,26 @@ export function Navbar() {
                 );
               })}
             </nav>
+
+            {/* ── Mobile: Contact + ThemeToggle (< 600px uniquement) ── */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.5 }}
+              className="min-[600px]:hidden relative flex items-center justify-between
+                         px-6 py-5 shrink-0"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+            >
+              <Link
+                href="/contact"
+                onClick={() => setMenuOpen(false)}
+                className="btn-glow px-6 py-3 text-sm"
+              >
+                <span>Contact</span>
+              </Link>
+              <ThemeToggle />
+            </motion.div>
 
             {/* ── Footer strip ────────────────────────── */}
             <motion.div

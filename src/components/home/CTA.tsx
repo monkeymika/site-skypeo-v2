@@ -1,64 +1,342 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { TextReveal } from "@/components/ui/TextReveal";
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+import { useGSAP } from "@gsap/react";
 
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
+
+const NUM_BANDS = 9;
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA — Panel reveal + pin + carousel scroll
+
+   ST1 : N bandes horizontales montent en décalé (stagger random)
+         → transition hachée, pas d'un seul bloc
+   ST2 : section épinglée :
+         - Line 1 (chars) apparaît puis disparaît
+         - Line 2 (chars) idem — NOTE: pas de gradient-text sur les
+           éléments SplitText (background-clip: text incompatible avec
+           position:relative des char spans)
+         - 3 phrases courtes (words) apparaissent l'une après l'autre
+         - La 3ème phrase + le bouton apparaissent simultanément
+═══════════════════════════════════════════════════════════════ */
 export function CTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const bandsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const line1TextRef = useRef<HTMLDivElement>(null);
+  const line2TextRef = useRef<HTMLDivElement>(null);
+
+  const phrase1Ref = useRef<HTMLParagraphElement>(null);
+  const phrase2Ref = useRef<HTMLParagraphElement>(null);
+  const phrase3Ref = useRef<HTMLParagraphElement>(null);
+  const btnsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const section = sectionRef.current;
+      const panel = panelRef.current;
+      if (!section || !panel) return;
+
+      /* ── SplitText ──────────────────────────────────────────── */
+      const split1 = SplitText.create(line1TextRef.current!, { type: "chars" });
+      const split2 = SplitText.create(line2TextRef.current!, { type: "chars" });
+      const splitP1 = SplitText.create(phrase1Ref.current!, { type: "words" });
+      const splitP2 = SplitText.create(phrase2Ref.current!, { type: "words" });
+      const splitP3 = SplitText.create(phrase3Ref.current!, { type: "words" });
+
+      /* ── États initiaux ─────────────────────────────────────── */
+      const bandEls = bandsRef.current.filter(Boolean) as HTMLDivElement[];
+      gsap.set(bandEls, { y: window.innerHeight });
+
+      gsap.set([...split1.chars, ...split2.chars], { autoAlpha: 0, y: 100 });
+      gsap.set([...splitP1.words, ...splitP2.words, ...splitP3.words], {
+        autoAlpha: 0,
+        y: 40,
+      });
+      gsap.set(btnsRef.current, { autoAlpha: 0, y: 30 });
+
+      /* ══════════════════════════════════════════════════════════
+       ST1 — Bandes hachées montent pendant le scroll d'entrée
+    ══════════════════════════════════════════════════════════ */
+      gsap.to(bandEls, {
+        y: 0,
+        ease: "none",
+        stagger: { each: 0.14, from: "random" },
+        scrollTrigger: {
+          trigger: section,
+          start: "top bottom",
+          end: "top top",
+          scrub: 1.5,
+        },
+      });
+
+      /* ══════════════════════════════════════════════════════════
+       ST2 — Section épinglée
+    ══════════════════════════════════════════════════════════ */
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          pin: true,
+          start: "top top",
+          end: "+=4800",
+          scrub: 1.5,
+          anticipatePin: 1,
+        },
+      });
+
+      /* ── Line 1 in ───────────────────────────────────────────── */
+      tl.to(split1.chars, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.03,
+      });
+      tl.to({}, { duration: 0.5 });
+
+      /* ── Line 1 out ──────────────────────────────────────────── */
+      tl.to(split1.chars, {
+        autoAlpha: 0,
+        y: -100,
+        duration: 0.5,
+        ease: "power3.in",
+        stagger: 0.02,
+      });
+
+      /* ── Line 2 in ───────────────────────────────────────────── */
+      tl.to(split2.chars, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        stagger: 0.03,
+      });
+      tl.to({}, { duration: 0.5 });
+
+      /* ── Line 2 out ──────────────────────────────────────────── */
+      tl.to(split2.chars, {
+        autoAlpha: 0,
+        y: -100,
+        duration: 0.5,
+        ease: "power3.in",
+        stagger: 0.02,
+      });
+
+      /* ── Phrase 1 in ─────────────────────────────────────────── */
+      tl.to(splitP1.words, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.55,
+        ease: "power3.out",
+        stagger: 0.07,
+      });
+      tl.to({}, { duration: 0.5 });
+
+      /* ── Phrase 1 out ────────────────────────────────────────── */
+      tl.to(splitP1.words, {
+        autoAlpha: 0,
+        y: -40,
+        duration: 0.4,
+        ease: "power3.in",
+        stagger: 0.04,
+      });
+
+      /* ── Phrase 2 in ─────────────────────────────────────────── */
+      tl.to(splitP2.words, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.55,
+        ease: "power3.out",
+        stagger: 0.07,
+      });
+      tl.to({}, { duration: 0.5 });
+
+      /* ── Phrase 2 out ────────────────────────────────────────── */
+      tl.to(splitP2.words, {
+        autoAlpha: 0,
+        y: -40,
+        duration: 0.4,
+        ease: "power3.in",
+        stagger: 0.04,
+      });
+
+      /* ── Phrase 3 in + bouton simultanément ─────────────────── */
+      tl.to(splitP3.words, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.55,
+        ease: "power3.out",
+        stagger: 0.07,
+      });
+      tl.to(
+        btnsRef.current,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.55,
+          ease: "power3.out",
+        },
+        "<0.2",
+      );
+
+      tl.to({}, { duration: 1.8 }); // hold final avant unpin
+
+      /* ── Cleanup ─────────────────────────────────────────────── */
+      return () => {
+        split1.revert();
+        split2.revert();
+        splitP1.revert();
+        splitP2.revert();
+        splitP3.revert();
+      };
+    },
+    { scope: sectionRef },
+  );
+
+  const itemStyle: React.CSSProperties = {
+    position: "absolute",
+    inset: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "0 clamp(20px, 5vw, 80px)",
+    textAlign: "center",
+    pointerEvents: "none",
+  };
+
   return (
-    <section className="py-24 px-5 sm:px-8 lg:px-10">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="relative rounded-3xl overflow-hidden py-20 px-8 sm:px-16 text-center"
-          style={{ background: "linear-gradient(135deg, #2D1B69 0%, #1A0D3D 40%, #2A0A20 100%)" }}
-        >
-          {/* Grid */}
-          <div className="hero-grid absolute inset-0 opacity-40 pointer-events-none" />
-          {/* Glows */}
-          <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(123,47,190,0.35) 0%, transparent 70%)" }} />
-          <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full blur-3xl pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(233,30,140,0.2) 0%, transparent 70%)" }} />
+    <section
+      ref={sectionRef}
+      style={{ height: "100vh", overflow: "hidden", position: "relative" }}
+    >
+      {/* ── Bandes d'entrée hachées ──────────────────────────── */}
+      {Array.from({ length: NUM_BANDS }).map((_, i) => (
+        <div
+          key={i}
+          ref={(el) => { bandsRef.current[i] = el; }}
+          className="bg-white dark:bg-black"
+          style={{
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: `${(i / NUM_BANDS) * 100}%`,
+            width: `${100 / NUM_BANDS}%`,
+            borderRight: "1px solid rgba(0,0,0,0.04)",
+            zIndex: 0,
+          }}
+        />
+      ))}
 
-          <div className="relative">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-violet-light/60 mb-5">
-              Passez à l'action
-            </p>
+      {/* ── Contenu (au-dessus des bandes) ───────────────────── */}
+      <div
+        ref={panelRef}
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "transparent",
+          overflow: "hidden",
+          zIndex: 1,
+        }}
+      >
+        {/* Grid */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.18]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(0,143,120,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,143,120,0.5) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+          }}
+        />
+        {/* Glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,143,120,0.09) 0%, transparent 70%)",
+          }}
+        />
 
-            <div className="overflow-hidden mb-2">
-              <TextReveal className="font-bebas text-white block" style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" } as React.CSSProperties}>
-                PRÊT À GAGNER DU TEMPS
-              </TextReveal>
-            </div>
-            <div className="overflow-hidden mb-8">
-              <TextReveal delay={0.12} className="font-bebas block" style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" } as React.CSSProperties}>
-                <span className="gradient-text-rev">CHAQUE SEMAINE ?</span>
-              </TextReveal>
-            </div>
-
-            <p className="text-white/50 text-base max-w-lg mx-auto mb-10">
-              Premier échange gratuit de 30 minutes. On analyse votre situation et
-              on vous propose les meilleures solutions — sans engagement.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link href="/contact" className="btn-glow">
-                <span>Prendre contact gratuitement</span>
-              </Link>
-              <a href="tel:+33660534389"
-                className="flex items-center gap-2 px-7 py-3.5 rounded-2xl border border-white/15 text-white/70 hover:border-white/30 hover:text-white text-sm font-semibold transition-all duration-200 hover:-translate-y-px">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                +33 6 60 53 43 89
-              </a>
-            </div>
+        {/* ── LINE 1 : "ON S'OCCUPE DE TOUT." ─────────────── */}
+        <div style={itemStyle}>
+          <div
+            ref={line1TextRef}
+            className="font-bebas fg-1"
+            style={{ fontSize: "clamp(3rem, 9vw, 5rem)", lineHeight: 0.9 }}
+          >
+            ON S&apos;OCCUPE DE TOUT.
           </div>
-        </motion.div>
+        </div>
+
+        {/* ── LINE 2 : "VOUS TRAVAILLEZ." ──────────────────── */}
+        {/* Couleur solide (pas gradient-text) : background-clip:text
+            est incompatible avec position:relative des char spans GSAP */}
+        <div style={itemStyle}>
+          <div
+            ref={line2TextRef}
+            className="font-bebas"
+            style={{
+              fontSize: "clamp(3rem, 9vw, 5rem)",
+              lineHeight: 0.9,
+              color: "#008f78",
+            }}
+          >
+            VOUS TRAVAILLEZ.
+          </div>
+        </div>
+
+        {/* ── PHRASE 1 ─────────────────────────────────────── */}
+        <div style={itemStyle}>
+          <p
+            ref={phrase1Ref}
+            className="font-bebas fg-1 text-center"
+            style={{ fontSize: "clamp(3rem, 9vw, 5rem)", lineHeight: 0.9 }}
+          >
+            Automatisations sur mesure.
+          </p>
+        </div>
+
+        {/* ── PHRASE 2 ─────────────────────────────────────── */}
+        <div style={itemStyle}>
+          <p
+            ref={phrase2Ref}
+            className="font-bebas fg-1 text-center"
+            style={{ fontSize: "clamp(3rem, 9vw, 5rem)", lineHeight: 0.9 }}
+          >
+            +150 heures récupérées chaque année.
+          </p>
+        </div>
+
+        {/* ── PHRASE 3 + BOUTON ────────────────────────────── */}
+        <div
+          style={{
+            ...itemStyle,
+            flexDirection: "column",
+            gap: "2rem",
+            pointerEvents: "none",
+          }}
+        >
+          <p
+            ref={phrase3Ref}
+            className="font-bebas fg-1 text-center"
+            style={{ fontSize: "clamp(3rem, 9vw, 5rem)", lineHeight: 0.9 }}
+          >
+            Premier échange offert.
+          </p>
+          <div ref={btnsRef} style={{ pointerEvents: "auto" }}>
+            <Link
+              href="/contact"
+              className="btn-glow px-8 py-4 rounded-2xl font-semibold text-sm block"
+            >
+              <span>Prendre contact gratuitement</span>
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

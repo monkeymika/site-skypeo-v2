@@ -2,211 +2,224 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { SplitText } from "@/components/ui/SplitText";
+import { useRef } from "react";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { ParticleField } from "@/components/ui/ParticleField";
 
-export function Hero() {
+/* ── Word-by-word reveal animation ─────────────────── */
+function WordReveal({
+  text,
+  delay = 0,
+  className = "",
+  accentWords = [] as string[],
+}: {
+  text: string;
+  delay?: number;
+  className?: string;
+  accentWords?: string[];
+}) {
+  const words = text.split(" ");
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Animated particles + orbs */}
-      <ParticleField />
+    <span className={className} aria-label={text}>
+      {words.map((word, i) => {
+        const isAccent = accentWords.includes(word);
+        return (
+          <span
+            key={i}
+            className="inline-block overflow-hidden mr-[0.22em] last:mr-0"
+          >
+            <motion.span
+              className={`inline-block ${isAccent ? "gradient-text" : ""}`}
+              initial={{ y: "105%", opacity: 0 }}
+              animate={{ y: "0%", opacity: 1 }}
+              transition={{
+                duration: 0.72,
+                delay: delay + i * 0.08,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              {word}
+            </motion.span>
+          </span>
+        );
+      })}
+    </span>
+  );
+}
 
-      {/* Grid overlay */}
-      <div className="hero-grid absolute inset-0 pointer-events-none opacity-50" />
+/* ════════════════════════════════════════════════════
+   HERO
+════════════════════════════════════════════════════ */
+export function Hero() {
+  const lineRef = useRef<HTMLDivElement>(null);
 
-      {/* Top violet glow */}
+  return (
+    <section className="relative min-h-screen flex flex-col justify-between overflow-hidden">
+      {/* Hero grid pattern */}
+      <div className="hero-grid absolute inset-0 pointer-events-none" />
+
+      {/* Radial glow — top center, brand green */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 75% 50% at 50% -5%, rgba(123,47,190,0.16) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 45% at 50% 0%, rgba(0,143,120,0.14) 0%, transparent 70%)",
+        }}
+      />
+      {/* Radial glow — bottom right, brand blue */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 40% at 90% 100%, rgba(43,52,117,0.20) 0%, transparent 65%)",
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 w-full pt-20 pb-32">
-        <div className="grid lg:grid-cols-12 gap-8 items-center pt-12">
-          {/* ── LEFT: main content ─────────────────── */}
-          <div className="lg:col-span-8">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-8"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-mid/25 bg-violet-mid/10 text-violet-mid dark:text-violet-light text-[10px] font-bold uppercase tracking-[0.25em]">
-                <motion.span
-                  className="w-1.5 h-1.5 rounded-full bg-rose"
-                  animate={{ scale: [1, 1.4, 1], opacity: [1, 0.6, 1] }}
-                  transition={{
-                    duration: 1.8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                N°1 sur les automatisations à Nancy
-              </span>
-            </motion.div>
-
-            {/* ── Main heading: word-by-word ──────── */}
-            <h1
-              className="font-bebas fg-1 mb-6"
-              style={{
-                fontSize: "clamp(3.8rem, 9.5vw, 8rem)",
-                lineHeight: 0.95,
-              }}
-            >
-              {/* Line 1 */}
-              <SplitText
-                text="AUTOMATISATIONS"
-                delay={0.3}
-                onMount
-                style={{ display: "block" }}
-              />
-              {/* Line 2 — gradient per word */}
-              <SplitText
-                text="& DIGITALISATION"
-                delay={0.5}
-                onMount
-                wordClass="gradient-text"
-                style={{ display: "block" }}
-              />
-            </h1>
-
-            {/* Animated divider */}
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.9,
-                ease: [0.76, 0, 0.24, 1],
-              }}
-              className="origin-left h-px mb-6"
-              style={{
-                background:
-                  "linear-gradient(90deg, #7B2FBE, #E91E8C, transparent)",
-              }}
-            />
-
-            {/* Tagline — word by word */}
-            <div className="mb-10 max-w-xl">
-              <SplitText
-                text="On aide les artisans, TPE et pros débordés à simplifier leur quotidien."
-                delay={1.1}
-                onMount
-                className="text-base sm:text-lg fg-3 leading-relaxed"
-                stagger={0.04}
-              />
-            </div>
-
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.5 }}
-              className="flex flex-wrap items-center gap-3"
-            >
-              <Link href="/contact" className="btn-glow">
-                <span>Découvrir nos solutions</span>
-              </Link>
-              <Link href="/automatisations" className="btn-outline">
-                Voir les automatisations →
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* ── RIGHT: animated stat card ──────────── */}
-          <motion.div
-            initial={{ opacity: 0, x: 36 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: 1.7,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            className="lg:col-span-4 hidden lg:block"
-          >
-            <div className="glass-card grad-border p-8 text-center">
-              {/* Animated counter: +0H → +150H */}
-              <div
-                className="font-bebas gradient-text mb-2"
-                style={{ fontSize: "clamp(4rem, 6vw, 6rem)" }}
-              >
-                <AnimatedCounter to={150} prefix="+" suffix="H" />
-              </div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] fg-4 mb-4">
-                économisées en moyenne
-              </p>
-              <div
-                className="h-px mb-4"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent, rgba(123,47,190,.3), transparent)",
-                }}
-              />
-              <p className="text-xs fg-4 leading-relaxed">
-                grâce à nos automatisations personnalisées pour artisans et TPE
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* ── Mobile stats ───────────────────────────── */}
+      {/* ── Top badge ─────────────────────────────── */}
+      <div className="relative pt-36 sm:pt-40 px-5 sm:px-8 lg:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.7 }}
-          className="lg:hidden mt-10 grid grid-cols-3 gap-3"
+          transition={{ duration: 0.55, delay: 0.25 }}
+          className="flex justify-between items-start"
         >
-          {[
-            { prefix: "+", to: 150, suffix: "H", label: "économisées" },
-            { prefix: "", to: 100, suffix: "%", label: "sur-mesure" },
-            { prefix: "", to: 7, suffix: "j", label: "de livraison" },
-          ].map((s) => (
-            <div key={s.label} className="glass-card p-4 text-center">
-              <p className="font-bebas text-2xl gradient-text">
-                <AnimatedCounter
-                  to={s.to}
-                  prefix={s.prefix}
-                  suffix={s.suffix}
-                />
-              </p>
-              <p className="text-[10px] fg-4 mt-0.5">{s.label}</p>
-            </div>
-          ))}
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#008f78]/25 bg-[#008f78]/10 text-[#008f78] text-[10px] font-bold uppercase tracking-[0.25em]">
+            <motion.span
+              className="w-1.5 h-1.5 rounded-full bg-[#008f78]"
+              animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            N°1 sur les automatisations à Nancy
+          </span>
+
+          {/* Desktop tagline top-right */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="hidden md:block fg-3 text-sm max-w-[220px] text-right leading-relaxed"
+          >
+            Artisans · TPE · Pros débordés
+          </motion.p>
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* ── MEGA HEADING ──────────────────────────── */}
+      <div className="relative flex-1 flex flex-col justify-center px-5 sm:px-8 lg:px-12 py-8">
+        <h1
+          className="font-bebas fg-1 leading-none tracking-tight uppercase"
+          style={{ fontSize: "clamp(3.5rem, 12vw, 5.5rem)", lineHeight: 0.88 }}
+        >
+          {/* Line 1 */}
+          <span className="block">
+            <WordReveal
+              text="AUTOMATISEZ"
+              delay={0.3}
+              accentWords={["AUTOMATISEZ"]}
+            />
+          </span>
+          {/* Line 2 */}
+          <span className="block">
+            <WordReveal text="VOTRE" delay={0.5} />
+          </span>
+          {/* Line 3 */}
+          <span className="block">
+            <WordReveal text="BUSINESS." delay={0.7} />
+          </span>
+        </h1>
+
+        {/* Animated divider */}
+        <motion.div
+          ref={lineRef}
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 1, delay: 1.1, ease: [0.76, 0, 0.24, 1] }}
+          className="origin-left mt-8 mb-8 h-px max-w-2xl"
+          style={{
+            background: "linear-gradient(90deg, #008f78, #2b3475, transparent)",
+          }}
+        />
+
+        {/* ── Bottom row: desc + stats + CTA ─────── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-end max-w-5xl">
+          {/* Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
+            className="md:col-span-1"
+          >
+            <p className="fg-3 text-base leading-relaxed">
+              On aide les artisans, TPE et pros débordés à simplifier leur
+              quotidien grâce aux automatisations et aux sites web sur-mesure.
+            </p>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.35 }}
+            className="md:col-span-1 flex gap-8"
+          >
+            <div>
+              <p
+                className="font-bebas gradient-text"
+                style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1 }}
+              >
+                <AnimatedCounter to={150} prefix="+" suffix="H" />
+              </p>
+              <p className="text-[10px] fg-4 uppercase tracking-widest mt-1">
+                économisées
+              </p>
+            </div>
+            <div>
+              <p
+                className="font-bebas text-[#008f78]"
+                style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1 }}
+              >
+                <AnimatedCounter to={7} suffix="j" />
+              </p>
+              <p className="text-[10px] fg-4 uppercase tracking-widest mt-1">
+                de livraison
+              </p>
+            </div>
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.5 }}
+            className="md:col-span-1 flex flex-col sm:flex-row md:flex-col gap-3"
+          >
+            <Link href="/contact" className="btn-glow text-center">
+              <span>Découvrir nos solutions</span>
+            </Link>
+            <Link href="/automatisations" className="btn-outline text-center">
+              Voir les automatisations →
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ── Scroll indicator ──────────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.0, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
+        transition={{ delay: 2.2, duration: 0.8 }}
+        className="relative pb-10 px-5 sm:px-8 lg:px-12 flex items-center gap-4"
       >
-        <span className="text-[9px] font-bold uppercase tracking-[0.25em] fg-5">
-          Scroll
-        </span>
         <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <svg
-            className="w-4 h-4 fg-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </motion.div>
+          animate={{ scaleY: [1, 0.5, 1] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          className="w-px h-10 rounded-full"
+          style={{
+            background: "linear-gradient(to bottom, #008f78, transparent)",
+          }}
+        />
+        <span className="text-[9px] font-bold uppercase tracking-[0.3em] fg-5">
+          Scroll pour découvrir
+        </span>
       </motion.div>
     </section>
   );
