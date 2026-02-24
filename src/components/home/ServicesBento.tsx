@@ -79,7 +79,7 @@ export function ServicesBento() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="font-black text-white leading-none mb-3"
-              style={{ fontSize: "clamp(3.5rem, 6vw, 5rem)" }}
+              style={{ fontSize: "clamp(2.5rem, 11vw, 5rem)" }}
             >
               +150h
             </motion.p>

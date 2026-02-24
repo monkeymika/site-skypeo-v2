@@ -107,7 +107,7 @@ export function Hero() {
       <div className="relative flex-1 flex flex-col justify-center px-5 sm:px-8 lg:px-12 py-8">
         <h1
           className="font-bebas fg-1 leading-none tracking-tight uppercase"
-          style={{ fontSize: "clamp(3.5rem, 12vw, 5.5rem)", lineHeight: 0.88 }}
+          style={{ fontSize: "clamp(2rem, 12vw, 5.5rem)", lineHeight: 0.88 }}
         >
           {/* Line 1 */}
           <span className="block">

@@ -60,7 +60,7 @@ export default function BlogPage() {
           style={{ background: "radial-gradient(ellipse 60% 50% at 70% 0%, rgba(233,30,140,0.10) 0%, transparent 65%)" }} />
         <div className="relative max-w-7xl mx-auto">
           <p className="section-tag mb-6">Blog</p>
-          <h1 className="font-bebas fg-1 mb-4" style={{ fontSize: "clamp(3rem, 7vw, 6rem)", lineHeight: 0.95 }}>
+          <h1 className="font-bebas fg-1 mb-4" style={{ fontSize: "clamp(2rem, 9vw, 6rem)", lineHeight: 0.95 }}>
             CONSEILS CONCRETS
             <br />
             <span className="gradient-text">POUR LES PROS DU TERRAIN.</span>

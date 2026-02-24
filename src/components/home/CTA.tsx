@@ -267,7 +267,7 @@ export function CTA() {
           <div
             ref={line1TextRef}
             className="font-bebas fg-1"
-            style={{ fontSize: "clamp(3rem, 9vw, 5rem)", lineHeight: 0.9 }}
+            style={{ fontSize: "clamp(1.5rem, 9vw, 5rem)", lineHeight: 0.9 }}
           >
             ON S&apos;OCCUPE DE TOUT.
           </div>
@@ -281,7 +281,7 @@ export function CTA() {
             ref={line2TextRef}
             className="font-bebas"
             style={{
-              fontSize: "clamp(3rem, 9vw, 5rem)",
+              fontSize: "clamp(1.5rem, 9vw, 5rem)",
               lineHeight: 0.9,
               color: "#008f78",
             }}
@@ -295,7 +295,7 @@ export function CTA() {
           <p
             ref={phrase1Ref}
             className="font-bebas fg-1 text-center"
-            style={{ fontSize: "clamp(3rem, 9vw, 5rem)", lineHeight: 0.9 }}
+            style={{ fontSize: "clamp(1.5rem, 9vw, 5rem)", lineHeight: 0.9 }}
           >
             Automatisations sur mesure.
           </p>
@@ -306,7 +306,7 @@ export function CTA() {
           <p
             ref={phrase2Ref}
             className="font-bebas fg-1 text-center"
-            style={{ fontSize: "clamp(3rem, 9vw, 5rem)", lineHeight: 0.9 }}
+            style={{ fontSize: "clamp(1.5rem, 9vw, 5rem)", lineHeight: 0.9 }}
           >
             +150 heures récupérées chaque année.
           </p>
@@ -324,7 +324,7 @@ export function CTA() {
           <p
             ref={phrase3Ref}
             className="font-bebas fg-1 text-center"
-            style={{ fontSize: "clamp(3rem, 9vw, 5rem)", lineHeight: 0.9 }}
+            style={{ fontSize: "clamp(1.5rem, 9vw, 5rem)", lineHeight: 0.9 }}
           >
             Premier échange offert.
           </p>

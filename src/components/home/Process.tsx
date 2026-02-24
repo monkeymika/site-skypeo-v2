@@ -79,7 +79,7 @@ export function Process() {
         <div className="process-header mb-16">
           <p className="section-tag mb-3">Notre processus</p>
           <div className="overflow-hidden">
-            <div className="process-line font-bebas fg-1" style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}>
+            <div className="process-line font-bebas fg-1" style={{ fontSize: "clamp(1.8rem, 8vw, 4.5rem)" }}>
               SIMPLE, RAPIDE,{" "}
               <span className="gradient-text">SANS PRISE DE TÊTE.</span>
             </div>

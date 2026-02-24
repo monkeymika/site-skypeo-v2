@@ -109,13 +109,13 @@ export function WhySkypeo() {
           <p className="section-tag mb-4">Pourquoi Skypeo</p>
           <div className="overflow-hidden">
             <div className="why-line font-bebas fg-1 block"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}>
+              style={{ fontSize: "clamp(1.8rem, 8vw, 5.5rem)" }}>
               L&apos;AGENCE QUI
             </div>
           </div>
           <div className="overflow-hidden">
             <div className="why-line font-bebas block"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}>
+              style={{ fontSize: "clamp(1.8rem, 8vw, 5.5rem)" }}>
               <span className="gradient-text">COMPREND VOTRE MÉTIER.</span>
             </div>
           </div>

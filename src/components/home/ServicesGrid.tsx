@@ -100,7 +100,7 @@ export function ServicesGrid() {
         <div className="services-header flex items-end justify-between mb-12">
           <div>
             <p className="section-tag mb-3">Nos services</p>
-            <h2 className="font-bebas fg-1" style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}>
+            <h2 className="font-bebas fg-1" style={{ fontSize: "clamp(1.8rem, 8vw, 4.5rem)" }}>
               CE QU&apos;ON FAIT<br />
               <span className="gradient-text">POUR VOUS.</span>
             </h2>
