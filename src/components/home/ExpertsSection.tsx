@@ -88,13 +88,13 @@ export function ExpertsSection() {
         <div className="experts-heading-wrap mb-16">
           <div className="overflow-hidden">
             <div className="heading-line font-bebas fg-6 block"
-              style={{ fontSize: "clamp(2rem, 10vw, 7rem)", lineHeight: 1 }}>
+              style={{ fontSize: "clamp(1.5rem, 9vw, 7rem)", lineHeight: 1 }}>
               EXPERTS EN
             </div>
           </div>
           <div className="overflow-hidden">
             <div className="heading-line font-bebas block"
-              style={{ fontSize: "clamp(2rem, 10vw, 7rem)", lineHeight: 1 }}>
+              style={{ fontSize: "clamp(1.5rem, 9vw, 7rem)", lineHeight: 1 }}>
               <span className="gradient-text">AUTOMATISATION</span>
             </div>
           </div>

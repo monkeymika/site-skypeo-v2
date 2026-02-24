@@ -25,7 +25,7 @@ export default function AutomatisationsPage() {
 
         <div className="relative max-w-7xl mx-auto w-full pt-16">
           <p className="section-tag mb-6">Automatisations</p>
-          <h1 className="font-bebas fg-1 mb-6" style={{ fontSize: "clamp(2rem, 10vw, 7rem)", lineHeight: 0.95 }}>
+          <h1 className="font-bebas fg-1 mb-6" style={{ fontSize: "clamp(1.5rem, 9vw, 7rem)", lineHeight: 0.95 }}>
             <TextReveal onMount delay={0.1}>ARRÊTEZ DE PERDRE VOTRE</TextReveal>
             <TextReveal onMount delay={0.25}>
               <span className="gradient-text">TEMPS SUR LES TÂCHES RÉPÉTITIVES.</span>

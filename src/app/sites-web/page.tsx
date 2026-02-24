@@ -94,7 +94,7 @@ export default function SitesWebPage() {
 
         <div className="relative max-w-7xl mx-auto w-full pt-16">
           <p className="section-tag mb-6">Sites web</p>
-          <h1 className="font-bebas fg-1 mb-6" style={{ fontSize: "clamp(2rem, 10vw, 7rem)", lineHeight: 0.95 }}>
+          <h1 className="font-bebas fg-1 mb-6" style={{ fontSize: "clamp(1.5rem, 9vw, 7rem)", lineHeight: 0.95 }}>
             <TextReveal onMount delay={0.1}>UN SITE QUI TRAVAILLE</TextReveal>
             <TextReveal onMount delay={0.25}>
               <span className="gradient-text-rev">POUR VOUS, 24H/24.</span>
