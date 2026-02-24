@@ -266,10 +266,10 @@ export function CTA() {
         <div style={itemStyle}>
           <div
             ref={line1TextRef}
-            className="font-bebas fg-1"
-            style={{ fontSize: "clamp(1rem, 7.5vw, 5rem)", lineHeight: 0.9 }}
+            className="font-bebas fg-1 text-center"
+            style={{ fontSize: "clamp(1rem, 7.5vw, 5rem)", lineHeight: 1.05 }}
           >
-            ON S&apos;OCCUPE DE TOUT.
+            ON S&apos;OCCUPE<br />DE TOUT.
           </div>
         </div>
 
@@ -282,11 +282,12 @@ export function CTA() {
             className="font-bebas"
             style={{
               fontSize: "clamp(1rem, 7.5vw, 5rem)",
-              lineHeight: 0.9,
+              lineHeight: 1.05,
               color: "#008f78",
+              textAlign: "center",
             }}
           >
-            VOUS TRAVAILLEZ.
+            VOUS<br />TRAVAILLEZ.
           </div>
         </div>
 
