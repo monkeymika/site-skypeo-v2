@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
   try {
     await resend.emails.send({
       from:    "Formulaire Skypeo <onboarding@resend.dev>",
-      to:      ["michael.skypeo@gmail.com"],
+      to:      ["timothee.skypeo@gmail.com"],
       replyTo: cleanEmail,
       subject: `Nouveau message de ${cleanName} – Skypeo`,
       html: `
