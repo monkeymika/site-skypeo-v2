@@ -56,6 +56,9 @@
   }
 
   /* ── LIGHT MODE body ─────────────────────────── */
+  html, body {
+    overflow-x: hidden;
+  }
   body {
     @apply bg-[#f5f2fa] text-[#160227] antialiased;
     font-feature-settings: "ss01", "ss02", "cv01";
@@ -193,7 +196,9 @@
 
   /* ── GLOW BUTTON: effet 3D press ─────────────────── */
   .btn-glow {
-    @apply relative rounded-2xl px-7 py-3.5 font-semibold text-sm text-white;
+    @apply relative rounded-2xl px-7 py-3.5 font-semibold text-sm text-white uppercase;
+    font-family: var(--font-syne);
+    letter-spacing: 0.06em;
     background: linear-gradient(135deg, #008f78, #2b3475);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.15),
@@ -224,7 +229,9 @@
 
   /* ── OUTLINE BUTTON — remplissage classique ────────── */
   .btn-outline {
-    @apply relative overflow-hidden rounded-2xl px-7 py-3.5 font-semibold text-sm;
+    @apply relative overflow-hidden rounded-2xl px-7 py-3.5 font-semibold text-sm uppercase;
+    font-family: var(--font-syne);
+    letter-spacing: 0.06em;
     border: 1px solid var(--card-border);
     color: var(--fg-2);
     isolation: isolate;
@@ -283,6 +290,7 @@
   /* ── SCROLLBAR ────────────────────────────────────── */
   ::-webkit-scrollbar {
     width: 4px;
+    height: 0;
   }
   ::-webkit-scrollbar-track {
     background: transparent;

@@ -1,7 +1,13 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
-import { stagger as staggerContainer, fadeUp, fadeLeft, fadeRight } from "@/lib/animations";
+import { stagger as staggerContainer, fadeUp } from "@/lib/animations";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const projects = [
   {
@@ -29,8 +35,57 @@ const projects = [
 ];
 
 export function Projects() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 768px)", () => {
+        const cards = gsap.utils.toArray<HTMLElement>(
+          section.querySelectorAll(".project-card"),
+        );
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "+=700",
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        tl.from(cards[0], { x: () => window.innerWidth, opacity: 0, duration: 1 })
+          .from(cards[1], { x: () => window.innerWidth, opacity: 0, duration: 1 }, ">-0.4");
+      });
+
+      mm.add("(max-width: 767px)", () => {
+        gsap.from(section.querySelectorAll(".project-card"), {
+          y: 80,
+          opacity: 0,
+          scale: 0.96,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.18,
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            once: true,
+          },
+        });
+      });
+    },
+    { scope: sectionRef },
+  );
+
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial="hidden"
@@ -56,18 +111,11 @@ export function Projects() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project, i) => (
-            <motion.div
+          {projects.map((project) => (
+            <div
               key={project.client}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              variants={i === 0 ? fadeLeft : fadeRight}
-              whileHover={{ y: -4, transition: { duration: 0.25 } }}
-              className="glass-card p-8 relative overflow-hidden group"
-              style={{
-                borderColor: project.border,
-              }}
+              className="project-card glass-card p-8 relative overflow-hidden group"
+              style={{ borderColor: project.border }}
             >
               {/* Hover glow */}
               <div
@@ -103,7 +151,7 @@ export function Projects() {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 

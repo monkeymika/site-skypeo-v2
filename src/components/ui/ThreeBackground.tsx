@@ -45,27 +45,27 @@ export function ThreeBackground() {
       /* ── Particles ───────────────────────────── */
       const COUNT = 1800;
       const positions = new Float32Array(COUNT * 3);
-      const colors    = new Float32Array(COUNT * 3);
-      const speeds    = new Float32Array(COUNT);
+      const colors = new Float32Array(COUNT * 3);
+      const speeds = new Float32Array(COUNT);
 
-      const green  = new THREE.Color("#008f78");
-      const blue   = new THREE.Color("#2b3475");
+      const green = new THREE.Color("#008f78");
+      const blue = new THREE.Color("#2b3475");
       const violet = new THREE.Color("#4a1a6e");
 
       for (let i = 0; i < COUNT; i++) {
         /* Scatter in a sphere shell */
         const theta = Math.random() * Math.PI * 2;
-        const phi   = Math.acos(2 * Math.random() - 1);
-        const r     = 18 + Math.random() * 28;
+        const phi = Math.acos(2 * Math.random() - 1);
+        const r = 18 + Math.random() * 28;
 
-        positions[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
+        positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
         positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
         positions[i * 3 + 2] = r * Math.cos(phi);
 
         /* Color mix */
         const t = Math.random();
         const c = t < 0.45 ? green : t < 0.72 ? blue : violet;
-        colors[i * 3]     = c.r;
+        colors[i * 3] = c.r;
         colors[i * 3 + 1] = c.g;
         colors[i * 3 + 2] = c.b;
 
@@ -73,14 +73,17 @@ export function ThreeBackground() {
       }
 
       const geometry = new THREE.BufferGeometry();
-      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute("color",    new THREE.BufferAttribute(colors, 3));
+      geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3),
+      );
+      geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
       const material = new THREE.PointsMaterial({
         size: 0.18,
         vertexColors: true,
         transparent: true,
-        opacity: 0.70,
+        opacity: 0.7,
         sizeAttenuation: true,
       });
 
@@ -110,7 +113,7 @@ export function ThreeBackground() {
       let targetY = 0;
 
       const onMouseMove = (e: MouseEvent) => {
-        mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
         mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
       };
       window.addEventListener("mousemove", onMouseMove, { passive: true });
@@ -128,8 +131,8 @@ export function ThreeBackground() {
       /* ── Dark mode opacity ───────────────────── */
       const updateOpacity = () => {
         const dark = document.documentElement.classList.contains("dark");
-        material.opacity = dark ? 0.85 : 0.28;
-        ringMat.opacity  = dark ? 0.10 : 0.04;
+        material.opacity = dark ? 0.6 : 0.28;
+        ringMat.opacity = dark ? 0.1 : 0.04;
       };
       updateOpacity();
 

@@ -1,3 +1,12 @@
+"use client";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 const projects = [
   {
     category: "Plomberie",
@@ -32,8 +41,59 @@ const projects = [
 ];
 
 export function Portfolio() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const mm = gsap.matchMedia();
+
+      /* ── 3 colonnes desktop : breakpoint lg ─────── */
+      mm.add("(min-width: 1024px)", () => {
+        const cards = gsap.utils.toArray<HTMLElement>(
+          section.querySelectorAll(".portfolio-card"),
+        );
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "+=900",
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        tl.from(cards[0], { x: () => window.innerWidth, opacity: 0, duration: 1 })
+          .from(cards[1], { x: () => window.innerWidth, opacity: 0, duration: 1 }, ">-0.4")
+          .from(cards[2], { x: () => window.innerWidth, opacity: 0, duration: 1 }, ">-0.4");
+      });
+
+      mm.add("(max-width: 1023px)", () => {
+        gsap.from(section.querySelectorAll(".portfolio-card"), {
+          y: 80,
+          opacity: 0,
+          scale: 0.96,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            once: true,
+          },
+        });
+      });
+    },
+    { scope: sectionRef },
+  );
+
   return (
-    <section id="realisations" className="py-24 px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="realisations" className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -55,7 +115,7 @@ export function Portfolio() {
           {projects.map((project) => (
             <div
               key={project.title}
-              className={`rounded-2xl p-6 border border-white/10 bg-gradient-to-br ${project.gradient} hover:border-white/20 transition-all duration-300 hover:-translate-y-1 group`}
+              className={`portfolio-card rounded-2xl p-6 border border-white/10 bg-gradient-to-br ${project.gradient} hover:border-white/20 transition-all duration-300 hover:-translate-y-1 group`}
             >
               <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                 {project.category}

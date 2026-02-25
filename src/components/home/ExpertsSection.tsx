@@ -65,19 +65,56 @@ export function ExpertsSection() {
         },
       });
 
-      /* ── Cards stagger ────────────────────────────── */
-      gsap.from(section.querySelectorAll(".service-card"), {
-        y: 80,
-        opacity: 0,
-        scale: 0.96,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.18,
-        scrollTrigger: {
-          trigger: section.querySelector(".cards-grid"),
-          start: "top 80%",
-          once: true,
-        },
+      /* ── Cards: pin + horizontal entry (desktop) ─── */
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 768px)", () => {
+        const cards = gsap.utils.toArray<HTMLElement>(
+          section.querySelectorAll(".service-card"),
+        );
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "+=700",
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        tl.from(cards[0], {
+          x: () => window.innerWidth,
+          opacity: 0,
+          duration: 1,
+        }).from(
+          cards[1],
+          {
+            x: () => window.innerWidth,
+            opacity: 0,
+            duration: 1,
+          },
+          ">-0.4",
+        );
+      });
+
+      /* ── Cards: simple stagger (mobile) ──────────── */
+      mm.add("(max-width: 767px)", () => {
+        gsap.from(section.querySelectorAll(".service-card"), {
+          y: 80,
+          opacity: 0,
+          scale: 0.96,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.18,
+          scrollTrigger: {
+            trigger: section.querySelector(".cards-grid"),
+            start: "top 80%",
+            once: true,
+          },
+        });
       });
     },
     { scope: sectionRef },
@@ -94,7 +131,7 @@ export function ExpertsSection() {
           <div className="overflow-hidden">
             <div
               className="heading-line font-bebas fg-6 block"
-              style={{ fontSize: "clamp(1.5rem, 8vw, 7rem)", lineHeight: 1 }}
+              style={{ fontSize: "clamp(1.5rem, 6vw, 5rem)", lineHeight: 1 }}
             >
               EXPERTS EN
             </div>
@@ -102,7 +139,7 @@ export function ExpertsSection() {
           <div className="overflow-hidden">
             <div
               className="heading-line font-bebas block"
-              style={{ fontSize: "clamp(1.5rem, 8vw, 7rem)", lineHeight: 1 }}
+              style={{ fontSize: "clamp(1.5rem, 6vw, 5rem)", lineHeight: 1 }}
             >
               <span className="gradient-text">AUTOMATISATION</span>
             </div>

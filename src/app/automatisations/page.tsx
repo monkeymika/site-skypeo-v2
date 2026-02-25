@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { TextReveal } from "@/components/ui/TextReveal";
-import { stagger, fadeUp } from "@/lib/animations";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const useCases = [
   {
@@ -51,6 +55,35 @@ const useCases = [
 ];
 
 export default function AutomatisationsPage() {
+  const useCasesRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+
+      /* ── Use cases : fadeUp stagger ─────────────── */
+      if (useCasesRef.current) {
+        gsap.fromTo(
+          useCasesRef.current.querySelectorAll(".usecase-card"),
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.08,
+            scrollTrigger: {
+              trigger: useCasesRef.current,
+              start: "top 80%",
+              once: true,
+            },
+          },
+        );
+      }
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       {/* Hero */}
@@ -63,20 +96,15 @@ export default function AutomatisationsPage() {
               "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(123,47,190,0.15) 0%, transparent 70%)",
           }}
         />
-
         <div className="relative max-w-7xl mx-auto w-full pt-40">
           <p className="section-tag mb-6">Automatisations</p>
           <h1
             className="font-bebas fg-1 mb-6"
             style={{ fontSize: "clamp(1.5rem, 8vw, 4rem)", lineHeight: 0.95 }}
           >
-            <TextReveal onMount delay={0.1}>
-              ARRÊTEZ DE PERDRE VOTRE
-            </TextReveal>
+            <TextReveal onMount delay={0.1}>ARRÊTEZ DE PERDRE VOTRE</TextReveal>
             <TextReveal onMount delay={0.25}>
-              <span className="gradient-text">
-                TEMPS SUR LES TÂCHES RÉPÉTITIVES.
-              </span>
+              <span className="gradient-text">TEMPS SUR LES TÂCHES RÉPÉTITIVES.</span>
             </TextReveal>
           </h1>
           <motion.div
@@ -92,8 +120,7 @@ export default function AutomatisationsPage() {
             <div className="max-w-lg">
               <p className="fg-3 text-lg leading-relaxed mb-6">
                 Skypeo identifie ce qui vous vole du temps chaque semaine et le
-                supprime. Devis, relances, rappels, facturation — tout ça peut
-                tourner seul.
+                supprime. Devis, relances, rappels, facturation — tout ça peut tourner seul.
               </p>
               <div className="flex gap-3">
                 <Link href="/contact" className="btn-glow">
@@ -109,7 +136,7 @@ export default function AutomatisationsPage() {
       </section>
 
       {/* Use cases */}
-      <section className="py-24 px-5 sm:px-8 lg:px-10">
+      <section ref={useCasesRef} className="py-24 px-5 sm:px-8 lg:px-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -119,32 +146,15 @@ export default function AutomatisationsPage() {
             className="mb-14"
           >
             <p className="section-tag mb-3">Cas d'usage</p>
-            <h2
-              className="font-bebas fg-1"
-              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
-            >
+            <h2 className="font-bebas fg-1" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
               CE QU'ON PEUT <span className="gradient-text">AUTOMATISER.</span>
             </h2>
           </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={stagger}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
-          >
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {useCases.map((u) => (
-              <motion.div
-                key={u.n}
-                variants={fadeUp}
-                whileHover={{ y: -4, transition: { duration: 0.22 } }}
-                className="group glass-card p-7 flex flex-col"
-              >
+              <div key={u.n} className="usecase-card group glass-card p-7 flex flex-col">
                 <div className="flex items-start justify-between mb-4">
-                  <span className="font-bebas text-3xl gradient-text">
-                    {u.n}
-                  </span>
+                  <span className="font-bebas text-3xl gradient-text">{u.n}</span>
                   <span className="px-2.5 py-1 rounded-full text-[10px] font-bold border border-[#008f78]/25 text-[#008f78] bg-[#008f78]/10">
                     {u.impact}
                   </span>
@@ -157,24 +167,20 @@ export default function AutomatisationsPage() {
                   {u.title}
                 </h3>
                 <p className="text-sm fg-3 leading-relaxed flex-1">{u.desc}</p>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="pb-24 px-5 sm:px-8 lg:px-10">
         <div className="max-w-3xl mx-auto text-center">
-          <h2
-            className="font-bebas fg-1 mb-4"
-            style={{ fontSize: "clamp(2rem,4vw,3.5rem)" }}
-          >
+          <h2 className="font-bebas fg-1 mb-4" style={{ fontSize: "clamp(2rem,4vw,3.5rem)" }}>
             QUELLE TÂCHE VOUS PÈSE LE PLUS ?
           </h2>
           <p className="fg-3 mb-8 max-w-lg mx-auto">
-            On fait un audit gratuit de votre activité et on vous dit exactement
-            ce qu'on peut automatiser.
+            On fait un audit gratuit de votre activité et on vous dit exactement ce qu'on peut automatiser.
           </p>
           <Link href="/contact" className="btn-glow inline-flex">
             <span>Démarrer l'audit gratuit →</span>
