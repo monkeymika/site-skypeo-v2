@@ -40,7 +40,6 @@ export function BlogPreview() {
     const section = sectionRef.current;
     if (!section) return;
 
-    /* ── Header ────────────────────────────────── */
     gsap.from(section.querySelector(".blog-header"), {
       y: 36,
       opacity: 0,
@@ -52,45 +51,6 @@ export function BlogPreview() {
         once: true,
       },
     });
-
-    /* ── Cards: pin + horizontal entry (desktop) ─── */
-    const mm = gsap.matchMedia();
-
-    mm.add("(min-width: 768px)", () => {
-      const cards = gsap.utils.toArray<HTMLElement>(
-        section.querySelectorAll(".blog-card"),
-      );
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=700",
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      tl.from(cards[0], { x: () => window.innerWidth, opacity: 0, duration: 1 })
-        .from(cards[1], { x: () => window.innerWidth, opacity: 0, duration: 1 }, ">-0.4");
-    });
-
-    mm.add("(max-width: 767px)", () => {
-      const c = section.querySelectorAll(".blog-card");
-      gsap.from(c[0], {
-        x: -60, opacity: 0, duration: 0.85, ease: "power3.out",
-        scrollTrigger: { trigger: section.querySelector(".blog-grid"), start: "top 82%", once: true },
-      });
-      if (c[1]) {
-        gsap.from(c[1], {
-          x: 60, opacity: 0, duration: 0.85, ease: "power3.out", delay: 0.1,
-          scrollTrigger: { trigger: section.querySelector(".blog-grid"), start: "top 82%", once: true },
-        });
-      }
-    });
-
   }, { scope: sectionRef });
 
   return (

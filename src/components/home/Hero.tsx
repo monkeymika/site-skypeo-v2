@@ -75,12 +75,12 @@ export function Hero() {
       />
 
       {/* ── Top badge ─────────────────────────────── */}
-      <div className="relative pt-36 sm:pt-40 px-5 sm:px-8 lg:px-12">
+      <div className="relative pt-36 sm:pt-40 px-5 sm:px-8 lg:px-20">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.25 }}
-          className="flex justify-between items-start"
+          className="flex justify-center items-start"
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#008f78]/25 bg-[#008f78]/10 text-[#008f78] text-[10px] font-bold uppercase tracking-[0.25em]">
             <motion.span
@@ -90,21 +90,11 @@ export function Hero() {
             />
             N°1 sur les automatisations à Nancy
           </span>
-
-          {/* Desktop tagline top-right */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="hidden md:block fg-3 text-sm max-w-[220px] text-right leading-relaxed"
-          >
-            Artisans · TPE · Pros débordés
-          </motion.p>
         </motion.div>
       </div>
 
       {/* ── MEGA HEADING ──────────────────────────── */}
-      <div className="relative flex-1 flex flex-col justify-center px-5 sm:px-8 lg:px-12 py-8">
+      <div className="relative flex-1 flex flex-col items-center justify-center px-5 sm:px-8 lg:px-20 py-8 text-center">
         <h1
           className="font-bebas fg-1 leading-none tracking-tight uppercase"
           style={{ fontSize: "clamp(1rem, 9vw, 5.5rem)", lineHeight: 0.88 }}
@@ -119,11 +109,7 @@ export function Hero() {
           </span>
           {/* Line 2 */}
           <span className="block">
-            <WordReveal text="VOTRE" delay={0.5} />
-          </span>
-          {/* Line 3 */}
-          <span className="block">
-            <WordReveal text="BUSINESS." delay={0.7} />
+            <WordReveal text="VOTRE BUSINESS." delay={0.5} />
           </span>
         </h1>
 
@@ -133,14 +119,14 @@ export function Hero() {
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ duration: 1, delay: 1.1, ease: [0.76, 0, 0.24, 1] }}
-          className="origin-left mt-8 mb-8 h-px max-w-2xl"
+          className="origin-center mt-8 mb-8 h-px w-full max-w-2xl"
           style={{
             background: "linear-gradient(90deg, #008f78, #2b3475, transparent)",
           }}
         />
 
         {/* ── Bottom row: desc + stats + CTA ─────── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-end max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-end max-w-5xl w-full mx-auto">
           {/* Description */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -207,7 +193,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.2, duration: 0.8 }}
-        className="relative pb-10 px-5 sm:px-8 lg:px-12 flex items-center gap-4"
+        className="relative pb-10 px-5 sm:px-8 lg:px-20 flex justify-center items-center gap-4"
       >
         <motion.div
           animate={{ scaleY: [1, 0.5, 1] }}

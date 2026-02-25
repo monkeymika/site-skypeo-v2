@@ -4,7 +4,9 @@ import { ExpertsSection } from "@/components/home/ExpertsSection";
 import { ServicesGrid }   from "@/components/home/ServicesGrid";
 import { WhySkypeo }      from "@/components/home/WhySkypeo";
 import { Process }        from "@/components/home/Process";
+import { Testimonials }   from "@/components/home/Testimonials";
 import { BlogPreview }    from "@/components/home/BlogPreview";
+import { FAQ }            from "@/components/home/FAQ";
 import { CTA }            from "@/components/home/CTA";
 import type { Metadata }  from "next";
 
@@ -24,7 +26,9 @@ export default function Home() {
       <WhySkypeo />
       <Marquee />
       <Process />
+      <Testimonials />
       <BlogPreview />
+      <FAQ />
       <CTA />
     </>
   );
