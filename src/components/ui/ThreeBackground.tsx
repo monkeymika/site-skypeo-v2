@@ -128,8 +128,8 @@ export function ThreeBackground() {
       /* ── Dark mode opacity ───────────────────── */
       const updateOpacity = () => {
         const dark = document.documentElement.classList.contains("dark");
-        material.opacity = dark ? 0.70 : 0.18;
-        ringMat.opacity  = dark ? 0.06 : 0.02;
+        material.opacity = dark ? 0.85 : 0.28;
+        ringMat.opacity  = dark ? 0.10 : 0.04;
       };
       updateOpacity();
 
