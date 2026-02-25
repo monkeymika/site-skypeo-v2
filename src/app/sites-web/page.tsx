@@ -118,7 +118,6 @@ export default function SitesWebPage() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-
       /* ── Features : fadeUp stagger ─────────────── */
       if (featuresRef.current) {
         gsap.fromTo(
@@ -139,46 +138,24 @@ export default function SitesWebPage() {
         );
       }
 
-      /* ── Portfolio : pin + horizontal entry ────── */
+      /* ── Portfolio : fadeUp stagger ────────────── */
       if (portfolioRef.current) {
-        const mm = gsap.matchMedia();
-
-        mm.add("(min-width: 768px)", () => {
-          const cards = gsap.utils.toArray<HTMLElement>(
-            portfolioRef.current!.querySelectorAll(".portfolio-card"),
-          );
-          const tl = gsap.timeline({
+        gsap.fromTo(
+          portfolioRef.current.querySelectorAll(".portfolio-card"),
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power3.out",
+            stagger: 0.15,
             scrollTrigger: {
               trigger: portfolioRef.current,
-              start: "top top",
-              end: "+=700",
-              pin: true,
-              scrub: 1,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
+              start: "top 80%",
+              once: true,
             },
-          });
-          tl.from(cards[0], { x: () => window.innerWidth, opacity: 0, duration: 1 })
-            .from(cards[1], { x: () => window.innerWidth, opacity: 0, duration: 1 }, ">-0.4");
-        });
-
-        mm.add("(max-width: 767px)", () => {
-          gsap.fromTo(
-            portfolioRef.current!.querySelectorAll(".portfolio-card"),
-            { y: 60, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              stagger: 0.15,
-              scrollTrigger: {
-                trigger: portfolioRef.current,
-                start: "top 80%",
-                once: true,
-              },
-            },
-          );
-        });
+          },
+        );
       }
 
       /* ── Pricing : fadeUp stagger ──────────────── */
@@ -223,7 +200,9 @@ export default function SitesWebPage() {
             className="font-bebas fg-1 mb-6"
             style={{ fontSize: "clamp(1.5rem, 8vw, 4rem)", lineHeight: 0.95 }}
           >
-            <TextReveal onMount delay={0.1}>UN SITE QUI TRAVAILLE</TextReveal>
+            <TextReveal onMount delay={0.1}>
+              UN SITE QUI TRAVAILLE
+            </TextReveal>
             <TextReveal onMount delay={0.25}>
               <span className="gradient-text-rev">POUR VOUS, 24H/24.</span>
             </TextReveal>
@@ -236,7 +215,9 @@ export default function SitesWebPage() {
           >
             <div className="glass-card grad-border px-8 py-5 text-center">
               <p className="font-bebas text-5xl gradient-text-rev">87%</p>
-              <p className="text-xs fg-3 mt-1">cherchent sur Google avant d'appeler</p>
+              <p className="text-xs fg-3 mt-1">
+                cherchent sur Google avant d'appeler
+              </p>
             </div>
             <div className="max-w-lg">
               <p className="fg-3 text-lg leading-relaxed mb-6">
@@ -268,15 +249,25 @@ export default function SitesWebPage() {
             className="mb-14"
           >
             <p className="section-tag mb-3">Ce qu'on inclut</p>
-            <h2 className="font-bebas fg-1" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
-              CHAQUE SITE EST <span className="gradient-text">FAIT POUR CONVERTIR.</span>
+            <h2
+              className="font-bebas fg-1"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+            >
+              CHAQUE SITE EST{" "}
+              <span className="gradient-text">FAIT POUR CONVERTIR.</span>
             </h2>
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((f) => (
-              <div key={f.n} className="feature-card glass-card p-7 flex flex-col gap-3">
+              <div
+                key={f.n}
+                className="feature-card glass-card p-7 flex flex-col gap-3"
+              >
                 <span className="font-bebas text-3xl gradient-text">{f.n}</span>
-                <h3 className="font-bebas fg-1" style={{ fontSize: "clamp(1.2rem,2vw,1.5rem)" }}>
+                <h3
+                  className="font-bebas fg-1"
+                  style={{ fontSize: "clamp(1.2rem,2vw,1.5rem)" }}
+                >
                   {f.title}
                 </h3>
                 <p className="text-sm fg-3 leading-relaxed">{f.desc}</p>
@@ -287,7 +278,10 @@ export default function SitesWebPage() {
       </section>
 
       {/* Portfolio */}
-      <section ref={portfolioRef} className="py-24 px-5 sm:px-8 lg:px-10 overflow-hidden">
+      <section
+        ref={portfolioRef}
+        className="py-24 px-5 sm:px-8 lg:px-10 overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -297,8 +291,12 @@ export default function SitesWebPage() {
             className="mb-14"
           >
             <p className="section-tag mb-3">Portfolio</p>
-            <h2 className="font-bebas fg-1" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
-              ILS NOUS ONT FAIT <span className="gradient-text">CONFIANCE.</span>
+            <h2
+              className="font-bebas fg-1"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+            >
+              ILS NOUS ONT FAIT{" "}
+              <span className="gradient-text">CONFIANCE.</span>
             </h2>
           </motion.div>
           <div className="grid md:grid-cols-2 gap-5">
@@ -310,9 +308,13 @@ export default function SitesWebPage() {
                   rel="noopener noreferrer"
                   className="group block glass-card overflow-hidden"
                 >
-                  <div className={`h-32 bg-gradient-to-br ${p.color} relative flex items-center justify-center`}>
+                  <div
+                    className={`h-32 bg-gradient-to-br ${p.color} relative flex items-center justify-center`}
+                  >
                     <div className="hero-grid absolute inset-0 opacity-40" />
-                    <p className="relative font-bebas text-white/20 text-7xl select-none">{p.name[0]}</p>
+                    <p className="relative font-bebas text-white/20 text-7xl select-none">
+                      {p.name[0]}
+                    </p>
                   </div>
                   <div className="p-7">
                     <div className="flex items-start justify-between mb-3">
@@ -323,21 +325,31 @@ export default function SitesWebPage() {
                         >
                           {p.name}
                         </h3>
-                        <span className={`text-[10px] font-bold uppercase tracking-widest border px-2 py-0.5 rounded-full ${p.tag}`}>
+                        <span
+                          className={`text-[10px] font-bold uppercase tracking-widest border px-2 py-0.5 rounded-full ${p.tag}`}
+                        >
                           {p.sector}
                         </span>
                       </div>
                       <span className="fg-5 group-hover:fg-3 transition-colors">
                         <svg
                           className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
-                          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
                         </svg>
                       </span>
                     </div>
-                    <p className="text-sm fg-3 leading-relaxed mb-4">{p.desc}</p>
+                    <p className="text-sm fg-3 leading-relaxed mb-4">
+                      {p.desc}
+                    </p>
                     <p className="text-xs text-[#008f78] font-mono">{p.url}</p>
                   </div>
                 </a>
@@ -348,7 +360,7 @@ export default function SitesWebPage() {
       </section>
 
       {/* Pricing */}
-      <section ref={pricingRef} className="py-24 px-5 sm:px-8 lg:px-10">
+      {/* <section ref={pricingRef} className="py-24 px-5 sm:px-8 lg:px-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -405,15 +417,21 @@ export default function SitesWebPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA */}
       <section className="pb-24 px-5 sm:px-8 lg:px-10">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-bebas fg-1 mb-4" style={{ fontSize: "clamp(2rem,4vw,3.5rem)" }}>
-            VOTRE SITE EN <span className="gradient-text">MOINS DE 3 SEMAINES.</span>
+          <h2
+            className="font-bebas fg-1 mb-4"
+            style={{ fontSize: "clamp(2rem,4vw,3.5rem)" }}
+          >
+            VOTRE SITE EN{" "}
+            <span className="gradient-text">MOINS DE 3 SEMAINES.</span>
           </h2>
-          <p className="fg-3 mb-8 max-w-lg mx-auto">Dites-nous ce que vous faites, on s'occupe du reste.</p>
+          <p className="fg-3 mb-8 max-w-lg mx-auto">
+            Dites-nous ce que vous faites, on s'occupe du reste.
+          </p>
           <Link href="/contact" className="btn-glow inline-flex">
             <span>Obtenir un devis gratuit →</span>
           </Link>

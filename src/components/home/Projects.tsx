@@ -44,42 +44,22 @@ export function Projects() {
 
       const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 768px)", () => {
-        const cards = gsap.utils.toArray<HTMLElement>(
-          section.querySelectorAll(".project-card"),
-        );
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "+=700",
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        tl.from(cards[0], { x: () => window.innerWidth, opacity: 0, duration: 1 })
-          .from(cards[1], { x: () => window.innerWidth, opacity: 0, duration: 1 }, ">-0.4");
-      });
-
-      mm.add("(max-width: 767px)", () => {
-        gsap.from(section.querySelectorAll(".project-card"), {
-          y: 80,
-          opacity: 0,
-          scale: 0.96,
-          duration: 0.8,
+      gsap.fromTo(
+        section.querySelectorAll(".project-card"),
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
           ease: "power3.out",
-          stagger: 0.18,
+          stagger: 0.15,
           scrollTrigger: {
             trigger: section,
             start: "top 80%",
             once: true,
           },
-        });
-      });
+        },
+      );
     },
     { scope: sectionRef },
   );

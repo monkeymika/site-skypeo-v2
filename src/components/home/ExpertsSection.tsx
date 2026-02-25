@@ -65,57 +65,23 @@ export function ExpertsSection() {
         },
       });
 
-      /* ── Cards: pin + horizontal entry (desktop) ─── */
-      const mm = gsap.matchMedia();
-
-      mm.add("(min-width: 768px)", () => {
-        const cards = gsap.utils.toArray<HTMLElement>(
-          section.querySelectorAll(".service-card"),
-        );
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "+=700",
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        tl.from(cards[0], {
-          x: () => window.innerWidth,
-          opacity: 0,
-          duration: 1,
-        }).from(
-          cards[1],
-          {
-            x: () => window.innerWidth,
-            opacity: 0,
-            duration: 1,
-          },
-          ">-0.4",
-        );
-      });
-
-      /* ── Cards: simple stagger (mobile) ──────────── */
-      mm.add("(max-width: 767px)", () => {
-        gsap.from(section.querySelectorAll(".service-card"), {
-          y: 80,
-          opacity: 0,
-          scale: 0.96,
-          duration: 0.8,
+      /* ── Cards: fadeUp stagger ───────────────────── */
+      gsap.fromTo(
+        section.querySelectorAll(".service-card"),
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
           ease: "power3.out",
-          stagger: 0.18,
+          stagger: 0.15,
           scrollTrigger: {
             trigger: section.querySelector(".cards-grid"),
             start: "top 80%",
             once: true,
           },
-        });
-      });
+        },
+      );
     },
     { scope: sectionRef },
   );

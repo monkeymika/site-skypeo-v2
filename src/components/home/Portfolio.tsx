@@ -51,43 +51,22 @@ export function Portfolio() {
       const mm = gsap.matchMedia();
 
       /* ── 3 colonnes desktop : breakpoint lg ─────── */
-      mm.add("(min-width: 1024px)", () => {
-        const cards = gsap.utils.toArray<HTMLElement>(
-          section.querySelectorAll(".portfolio-card"),
-        );
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "+=900",
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        tl.from(cards[0], { x: () => window.innerWidth, opacity: 0, duration: 1 })
-          .from(cards[1], { x: () => window.innerWidth, opacity: 0, duration: 1 }, ">-0.4")
-          .from(cards[2], { x: () => window.innerWidth, opacity: 0, duration: 1 }, ">-0.4");
-      });
-
-      mm.add("(max-width: 1023px)", () => {
-        gsap.from(section.querySelectorAll(".portfolio-card"), {
-          y: 80,
-          opacity: 0,
-          scale: 0.96,
-          duration: 0.8,
+      gsap.fromTo(
+        section.querySelectorAll(".portfolio-card"),
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
           ease: "power3.out",
-          stagger: 0.15,
+          stagger: 0.12,
           scrollTrigger: {
             trigger: section,
             start: "top 80%",
             once: true,
           },
-        });
-      });
+        },
+      );
     },
     { scope: sectionRef },
   );
