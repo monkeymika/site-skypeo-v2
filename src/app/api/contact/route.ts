@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // ── Rate limiting simple (in-memory, par IP) ──────────────────────────────
 const rateLimit = new Map<string, { count: number; firstAt: number }>();
 const RATE_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
@@ -85,6 +83,8 @@ export async function POST(req: NextRequest) {
       : "Non précisé";
 
   // ── Envoi email via Resend ──────────────────────────────────────────────
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   try {
     await resend.emails.send({
       from:    "Formulaire Skypeo <onboarding@resend.dev>",

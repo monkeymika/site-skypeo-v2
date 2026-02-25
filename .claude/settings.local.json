@@ -13,7 +13,13 @@
       "WebFetch(domain:orbitaix.webflow.io)",
       "WebFetch(domain:wearestokt.com)",
       "WebFetch(domain:labs.anyflow.agency)",
-      "Bash(__NEW_LINE_30d550d139b3e533__ sed -i 's/pt-32/pt-16/g; s/pt-40/pt-20/g' /c/Users/monke/Desktop/site_skypeo_v2/src/app/automatisations/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/blog/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/contact/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/mentions-legales/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/sites-web/page.tsx)"
+      "Bash(__NEW_LINE_30d550d139b3e533__ sed -i 's/pt-32/pt-16/g; s/pt-40/pt-20/g' /c/Users/monke/Desktop/site_skypeo_v2/src/app/automatisations/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/blog/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/contact/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/mentions-legales/page.tsx /c/Users/monke/Desktop/site_skypeo_v2/src/app/sites-web/page.tsx)",
+      "mcp__puppeteer__puppeteer_navigate",
+      "mcp__puppeteer__puppeteer_screenshot",
+      "mcp__context7__resolve-library-id",
+      "mcp__puppeteer__puppeteer_evaluate",
+      "mcp__context7__query-docs",
+      "mcp__puppeteer__puppeteer_click"
     ]
   }
 }
