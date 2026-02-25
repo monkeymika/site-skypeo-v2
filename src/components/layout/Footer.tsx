@@ -20,13 +20,13 @@ export function Footer() {
               </div>
               <span className="font-bebas text-xl tracking-widest text-white">SKYPEO</span>
             </div>
-            <p className="text-sm text-white/40 leading-relaxed max-w-xs mb-5">
+            <p className="text-sm text-white/65 leading-relaxed max-w-xs mb-5">
               Création de sites web & automatisations sur mesure pour artisans, TPE et pros débordés. Nancy, France.
             </p>
             <div className="space-y-2">
               <a
                 href="mailto:timothee.skypeo@gmail.com"
-                className="flex items-center gap-2 text-sm text-white/40 hover:text-[#008f78] transition-colors"
+                className="flex items-center gap-2 text-sm text-white/65 hover:text-[#008f78] transition-colors"
               >
                 <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -35,7 +35,7 @@ export function Footer() {
               </a>
               <a
                 href="tel:+33660534389"
-                className="flex items-center gap-2 text-sm text-white/40 hover:text-[#008f78] transition-colors"
+                className="flex items-center gap-2 text-sm text-white/65 hover:text-[#008f78] transition-colors"
               >
                 <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -47,7 +47,7 @@ export function Footer() {
 
           {/* Nav */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/30 mb-4">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/55 mb-4">
               Navigation
             </h3>
             <ul className="space-y-2.5">
@@ -61,7 +61,7 @@ export function Footer() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-white/40 hover:text-white transition-colors"
+                    className="text-sm text-white/65 hover:text-white transition-colors"
                   >
                     {label}
                   </Link>
@@ -72,7 +72,7 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/30 mb-4">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/55 mb-4">
               Légal
             </h3>
             <ul className="space-y-2.5">
@@ -83,7 +83,7 @@ export function Footer() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-white/40 hover:text-white transition-colors"
+                    className="text-sm text-white/65 hover:text-white transition-colors"
                   >
                     {label}
                   </Link>
@@ -97,10 +97,10 @@ export function Footer() {
           className="border-t pt-8 flex flex-col sm:flex-row justify-between gap-3"
           style={{ borderColor: "rgba(0,143,120,0.10)" }}
         >
-          <p className="text-xs text-white/20">
+          <p className="text-xs text-white/50">
             © {new Date().getFullYear()} Skypeo — Nancy, France
           </p>
-          <p className="text-xs text-white/20">
+          <p className="text-xs text-white/50">
             Fait pour les pros qui n&apos;ont pas de temps à perdre
           </p>
         </div>

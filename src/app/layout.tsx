@@ -68,6 +68,93 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://skypeo.fr/#organization",
+      name: "Skypeo",
+      url: "https://skypeo.fr",
+      logo: "https://skypeo.fr/icon.png",
+      email: "timothee.skypeo@gmail.com",
+      telephone: "+33660534389",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Nancy",
+        addressRegion: "Grand Est",
+        addressCountry: "FR",
+      },
+      sameAs: [],
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://skypeo.fr/#localbusiness",
+      name: "Skypeo",
+      description:
+        "Création de sites web professionnels et automatisation de tâches répétitives pour artisans, TPE et pros débordés. Nancy & Grand Est.",
+      url: "https://skypeo.fr",
+      telephone: "+33660534389",
+      email: "timothee.skypeo@gmail.com",
+      image: "https://skypeo.fr/icon.png",
+      priceRange: "€€",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Nancy",
+        addressRegion: "Grand Est",
+        postalCode: "54000",
+        addressCountry: "FR",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 48.6921,
+        longitude: 6.1844,
+      },
+      areaServed: {
+        "@type": "GeoCircle",
+        geoMidpoint: {
+          "@type": "GeoCoordinates",
+          latitude: 48.6921,
+          longitude: 6.1844,
+        },
+        geoRadius: "80000",
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "09:00",
+          closes: "18:00",
+        },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Services Skypeo",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Automatisation sur-mesure",
+              description:
+                "Automatisation de devis, relances clients, rappels RDV et suivi de facturation pour artisans et TPE.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Création de site web professionnel",
+              description:
+                "Sites vitrines modernes, rapides et optimisés SEO pour artisans et TPE. À partir de 990 €.",
+            },
+          },
+        ],
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -79,6 +166,12 @@ export default function RootLayout({
       className={`${syne.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col">
         <ThemeProvider>
           <ThreeBackground />

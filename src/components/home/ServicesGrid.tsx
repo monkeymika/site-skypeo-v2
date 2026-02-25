@@ -105,7 +105,7 @@ export function ServicesGrid() {
               <span className="gradient-text">POUR VOUS.</span>
             </h2>
           </div>
-          <p className="hidden sm:block text-sm fg-4 max-w-xs text-right leading-relaxed">
+          <p className="hidden sm:block text-sm fg-3 max-w-xs text-right leading-relaxed">
             Des solutions concrètes, adaptées à votre métier.
           </p>
         </div>

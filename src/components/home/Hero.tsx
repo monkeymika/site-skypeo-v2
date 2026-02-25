@@ -168,21 +168,21 @@ export function Hero() {
               >
                 <AnimatedCounter to={150} prefix="+" suffix="H" />
               </p>
-              <p className="text-[10px] fg-4 uppercase tracking-widest mt-1">
+              <p className="text-[10px] fg-3 uppercase tracking-widest mt-1">
                 économisées
               </p>
             </div>
-            <div>
+            {/* <div>
               <p
                 className="font-bebas text-[#008f78]"
                 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1 }}
               >
                 <AnimatedCounter to={7} suffix="j" />
               </p>
-              <p className="text-[10px] fg-4 uppercase tracking-widest mt-1">
+              <p className="text-[10px] fg-3 uppercase tracking-widest mt-1">
                 de livraison
               </p>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* CTAs */}

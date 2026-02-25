@@ -16,7 +16,7 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label="Basculer le thème"
-      className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 text-violet-mid hover:text-violet-mid"
+      className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 text-[#008f78] hover:text-[#00b898]"
       style={{ background: "var(--subtle-bg)", border: "1px solid var(--card-border)" }}
     >
       {isDark ? (

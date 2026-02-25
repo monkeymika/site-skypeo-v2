@@ -15,7 +15,7 @@ const articles = [
     excerpt: "Envoyer un devis prend en moyenne 45 minutes. Voici comment réduire ça à 2 minutes sans perdre en qualité.",
     date: "12 jan. 2025",
     read: "5 min",
-    catColor: "text-violet-mid border-violet-mid/30 bg-violet-mid/10",
+    catColor: "text-[#008f78] border-[#008f78]/30 bg-[#008f78]/10",
     latest: true,
   },
   {
@@ -25,7 +25,7 @@ const articles = [
     excerpt: "87% des gens cherchent un artisan sur Google avant d'appeler. Voici ce que doit contenir votre site pour qu'ils vous choisissent.",
     date: "28 déc. 2024",
     read: "7 min",
-    catColor: "text-rose border-rose/30 bg-rose/10",
+    catColor: "text-[#2b3475] border-[#2b3475]/30 bg-[#2b3475]/10",
     latest: false,
   },
   {
@@ -45,7 +45,7 @@ const articles = [
     excerpt: "Un devis sans relance a 60% de chances de rester sans réponse. Voici comment mettre en place des relances automatiques en 1 heure.",
     date: "1 déc. 2024",
     read: "6 min",
-    catColor: "text-violet-mid border-violet-mid/30 bg-violet-mid/10",
+    catColor: "text-[#008f78] border-[#008f78]/30 bg-[#008f78]/10",
     latest: false,
   },
 ];
@@ -89,19 +89,19 @@ export default function BlogPage() {
                         Dernier article
                       </span>
                     )}
-                    <span className="text-[10px] fg-5">{a.read} de lecture</span>
+                    <span className="text-[10px] fg-4">{a.read} de lecture</span>
                   </div>
                 </div>
 
-                <h2 className="font-bebas fg-1 group-hover:text-violet-mid transition-colors mb-3"
+                <h2 className="font-bebas fg-1 group-hover:text-[#008f78] transition-colors mb-3"
                   style={{ fontSize: "clamp(1.3rem, 2vw, 1.7rem)", lineHeight: 1.2 }}>
                   {a.title}
                 </h2>
                 <p className="text-sm fg-3 leading-relaxed mb-6">{a.excerpt}</p>
 
                 <div className="flex items-center justify-between pt-4" style={{ borderTop: "1px solid var(--divider)" }}>
-                  <span className="text-xs fg-5">{a.date}</span>
-                  <span className="text-xs font-semibold text-violet-mid group-hover:text-rose transition-colors flex items-center gap-1">
+                  <span className="text-xs fg-4">{a.date}</span>
+                  <span className="text-xs font-semibold text-[#008f78] group-hover:text-[#2b3475] transition-colors flex items-center gap-1">
                     Lire
                     <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

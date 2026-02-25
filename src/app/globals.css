@@ -4,7 +4,11 @@
 
 /* ── Custom cursor: hide native on pointer devices ─────── */
 @media (hover: hover) and (pointer: fine) {
-  *, *::before, *::after { cursor: none !important; }
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
 }
 
 @layer base {
@@ -12,43 +16,43 @@
     scroll-behavior: smooth;
 
     /* ── Brand tokens ─────────────────────────── */
-    --brand:        #008f78;
-    --brand-light:  #00b898;
-    --brand-glow:   rgba(0, 143, 120, 0.22);
-    --blue:         #2b3475;
-    --blue-glow:    rgba(43, 52, 117, 0.25);
+    --brand: #008f78;
+    --brand-light: #00b898;
+    --brand-glow: rgba(0, 143, 120, 0.22);
+    --blue: #2b3475;
+    --blue-glow: rgba(43, 52, 117, 0.25);
 
     /* ── Light mode text ─────────────────────── */
     --fg-1: #160227;
-    --fg-2: rgba(22, 2, 39, 0.78);
-    --fg-3: rgba(22, 2, 39, 0.62);
-    --fg-4: rgba(22, 2, 39, 0.48);
-    --fg-5: rgba(22, 2, 39, 0.32);
-    --fg-6: rgba(22, 2, 39, 0.16);
+    --fg-2: rgba(22, 2, 39, 0.88);
+    --fg-3: rgba(22, 2, 39, 0.75);
+    --fg-4: rgba(22, 2, 39, 0.62);
+    --fg-5: rgba(22, 2, 39, 0.48);
+    --fg-6: rgba(22, 2, 39, 0.18);
 
     /* ── Light mode surfaces ─────────────────── */
-    --card-bg:     rgba(255, 255, 255, 0.82);
+    --card-bg: rgba(255, 255, 255, 0.82);
     --card-border: rgba(0, 143, 120, 0.16);
-    --divider:     rgba(22, 2, 39, 0.08);
-    --subtle-bg:   rgba(0, 143, 120, 0.05);
-    --hover-bg:    rgba(0, 143, 120, 0.08);
+    --divider: rgba(22, 2, 39, 0.08);
+    --subtle-bg: rgba(0, 143, 120, 0.05);
+    --hover-bg: rgba(0, 143, 120, 0.08);
   }
 
   .dark {
     /* ── Dark mode text ──────────────────────── */
     --fg-1: #f0ede8;
-    --fg-2: rgba(240, 237, 232, 0.60);
-    --fg-3: rgba(240, 237, 232, 0.42);
-    --fg-4: rgba(240, 237, 232, 0.28);
-    --fg-5: rgba(240, 237, 232, 0.16);
-    --fg-6: rgba(240, 237, 232, 0.09);
+    --fg-2: rgba(240, 237, 232, 0.85);
+    --fg-3: rgba(252, 252, 252, 0.87);
+    --fg-4: rgba(240, 237, 232, 0.54);
+    --fg-5: rgba(240, 237, 232, 0.582);
+    --fg-6: rgba(240, 237, 232, 0.12);
 
     /* ── Dark mode surfaces ──────────────────── */
-    --card-bg:     rgba(255, 255, 255, 0.04);
+    --card-bg: rgba(255, 255, 255, 0.04);
     --card-border: rgba(0, 143, 120, 0.15);
-    --divider:     rgba(255, 255, 255, 0.07);
-    --subtle-bg:   rgba(0, 143, 120, 0.07);
-    --hover-bg:    rgba(0, 143, 120, 0.10);
+    --divider: rgba(255, 255, 255, 0.07);
+    --subtle-bg: rgba(0, 143, 120, 0.07);
+    --hover-bg: rgba(0, 143, 120, 0.1);
   }
 
   /* ── LIGHT MODE body ─────────────────────────── */
@@ -63,7 +67,10 @@
   }
 
   /* ── Headings: Syne par défaut ──────────────── */
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-syne);
     font-weight: 800;
   }
@@ -83,12 +90,24 @@
 
 @layer utilities {
   /* ── ADAPTIVE TEXT COLORS ──────────────────────── */
-  .fg-1 { color: var(--fg-1); }
-  .fg-2 { color: var(--fg-2); }
-  .fg-3 { color: var(--fg-3); }
-  .fg-4 { color: var(--fg-4); }
-  .fg-5 { color: var(--fg-5); }
-  .fg-6 { color: var(--fg-6); }
+  .fg-1 {
+    color: var(--fg-1);
+  }
+  .fg-2 {
+    color: var(--fg-2);
+  }
+  .fg-3 {
+    color: var(--fg-3);
+  }
+  .fg-4 {
+    color: var(--fg-4);
+  }
+  .fg-5 {
+    color: var(--fg-5);
+  }
+  .fg-6 {
+    color: var(--fg-6);
+  }
 
   /* ── GRADIENT TEXT: green → blue ────────────────── */
   .gradient-text {
@@ -107,16 +126,20 @@
     @apply rounded-2xl backdrop-blur-sm;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      border-color 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
   }
   .glass-card:hover {
     border-color: rgba(0, 143, 120, 0.38);
     transform: translateY(-3px);
   }
   .dark .glass-card:hover {
-    box-shadow: 0 0 0 1px rgba(0, 143, 120, 0.12),
-                0 20px 48px rgba(0, 0, 0, 0.55),
-                0 0 60px rgba(0, 143, 120, 0.06);
+    box-shadow:
+      0 0 0 1px rgba(0, 143, 120, 0.12),
+      0 20px 48px rgba(0, 0, 0, 0.55),
+      0 0 60px rgba(0, 143, 120, 0.06);
   }
   .glass-card:hover {
     box-shadow: 0 12px 36px rgba(0, 143, 120, 0.14);
@@ -145,9 +168,18 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(0, 143, 120, 0.55), rgba(43, 52, 117, 0.35), transparent 65%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    background: linear-gradient(
+      135deg,
+      rgba(0, 143, 120, 0.55),
+      rgba(43, 52, 117, 0.35),
+      transparent 65%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
@@ -167,12 +199,14 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.15),
       0 4px 0 #005a4d,
       0 8px 24px rgba(0, 143, 120, 0.28);
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    transition:
+      transform 0.12s ease,
+      box-shadow 0.12s ease;
   }
   .btn-glow:hover {
     transform: translateY(2px);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
       0 2px 0 #005a4d,
       0 4px 14px rgba(0, 143, 120, 0.22);
   }
@@ -183,7 +217,10 @@
       0 0px 0 #005a4d,
       0 2px 6px rgba(0, 143, 120, 0.12);
   }
-  .btn-glow span { position: relative; z-index: 1; }
+  .btn-glow span {
+    position: relative;
+    z-index: 1;
+  }
 
   /* ── OUTLINE BUTTON — remplissage classique ────────── */
   .btn-outline {
@@ -191,7 +228,10 @@
     border: 1px solid var(--card-border);
     color: var(--fg-2);
     isolation: isolate;
-    transition: color 0.25s ease, border-color 0.25s ease, transform 0.12s ease;
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.12s ease;
   }
   .btn-outline::after {
     content: "";
@@ -208,15 +248,19 @@
     border-color: rgba(0, 143, 120, 0.55);
     transform: translateY(-2px);
   }
-  .btn-outline:hover::after { opacity: 1; }
-  .btn-outline:active { transform: translateY(-1px); }
+  .btn-outline:hover::after {
+    opacity: 1;
+  }
+  .btn-outline:active {
+    transform: translateY(-1px);
+  }
   .dark .btn-outline {
-    border-color: rgba(255, 255, 255, 0.12);
-    color: rgba(240, 237, 232, 0.72);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: rgba(240, 237, 232, 0.9);
   }
   .dark .btn-outline:hover {
     color: white;
-    box-shadow: 0 8px 32px rgba(0, 143, 120, 0.30);
+    box-shadow: 0 8px 32px rgba(0, 143, 120, 0.3);
   }
 
   /* ── GLOW ORB (décoratif) ─────────────────────────── */
@@ -237,8 +281,12 @@
   }
 
   /* ── SCROLLBAR ────────────────────────────────────── */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
   ::-webkit-scrollbar-thumb {
     background: rgba(0, 143, 120, 0.35);
     border-radius: 2px;

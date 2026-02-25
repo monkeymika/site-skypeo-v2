@@ -16,7 +16,7 @@ const SPARKS = Array.from({ length: 22 }, (_, i) => {
     left:  `${((a * 3.7) % 100).toFixed(1)}%`,
     top:   `${((a * 2.3 + 11) % 100).toFixed(1)}%`,
     size:  1.5 + (i % 3) * 0.8,
-    color: i % 3 === 0 ? "#7B2FBE" : i % 3 === 1 ? "#E91E8C" : "#9D5FE0",
+    color: i % 3 === 0 ? "#008f78" : i % 3 === 1 ? "#2b3475" : "#00b898",
     opMin: 0.05 + (i % 5) * 0.04,
     opMax: 0.20 + (i % 4) * 0.08,
     dur:   3.5 + (i % 5) * 1.2,

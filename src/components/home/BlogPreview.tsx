@@ -98,7 +98,7 @@ export function BlogPreview() {
           </div>
           <Link
             href="/blog"
-            className="hidden sm:flex items-center gap-2 text-sm fg-4 hover:text-[#008f78] transition-colors group"
+            className="hidden sm:flex items-center gap-2 text-sm fg-3 hover:text-[#008f78] transition-colors group"
           >
             Tous les articles
             <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +122,7 @@ export function BlogPreview() {
                   >
                     {p.cat}
                   </span>
-                  <span className="text-[10px] fg-5">{p.read} de lecture</span>
+                  <span className="text-[10px] fg-4">{p.read} de lecture</span>
                 </div>
 
                 <h3
@@ -134,7 +134,7 @@ export function BlogPreview() {
                 <p className="text-sm fg-3 leading-relaxed mb-6">{p.excerpt}</p>
 
                 <div className="flex items-center justify-between pt-4" style={{ borderTop: "1px solid var(--divider)" }}>
-                  <span className="text-xs fg-5">{p.date}</span>
+                  <span className="text-xs fg-4">{p.date}</span>
                   <span
                     className="text-xs font-semibold flex items-center gap-1 transition-colors group-hover:text-[#008f78]"
                     style={{ color: p.accentColor }}
