@@ -1,12 +1,10 @@
 import { Hero }           from "@/components/home/Hero";
 import { Marquee }        from "@/components/ui/Marquee";
 import { ExpertsSection } from "@/components/home/ExpertsSection";
-import { ServicesGrid }   from "@/components/home/ServicesGrid";
-import { WhySkypeo }      from "@/components/home/WhySkypeo";
 import { Process }        from "@/components/home/Process";
 import { Testimonials }   from "@/components/home/Testimonials";
 import { BlogPreview }    from "@/components/home/BlogPreview";
-import { FAQ }            from "@/components/home/FAQ";
+import { WhyAndFAQ }      from "@/components/home/WhyAndFAQ";
 import { CTA }            from "@/components/home/CTA";
 import type { Metadata }  from "next";
 
@@ -22,13 +20,10 @@ export default function Home() {
       <Hero />
       <Marquee />
       <ExpertsSection />
-      <ServicesGrid />
-      <WhySkypeo />
-      <Marquee />
       <Process />
       <Testimonials />
       <BlogPreview />
-      <FAQ />
+      <WhyAndFAQ />
       <CTA />
     </>
   );
