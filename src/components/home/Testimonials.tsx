@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 /* ── Types ───────────────────────────────────────────────── */
 interface GoogleReview {
@@ -150,7 +150,8 @@ export async function Testimonials() {
         {/* Cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {reviews.slice(0, 6).map((r, i) => (
-            <div key={i} className="glass-card p-6 flex flex-col gap-4">
+            <TiltCard key={i} intensity={5} className="h-full">
+            <div className="glass-card p-6 flex flex-col gap-4 h-full">
               <div className="flex items-center justify-between">
                 <Stars rating={r.rating} />
                 <span className="text-[10px] fg-5">{r.relative_time_description}</span>
@@ -185,6 +186,7 @@ export async function Testimonials() {
                 )}
               </div>
             </div>
+            </TiltCard>
           ))}
         </div>
 

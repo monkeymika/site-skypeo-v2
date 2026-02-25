@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -92,9 +93,10 @@ export function Portfolio() {
         {/* Projects */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
           {projects.map((project) => (
+            <div key={project.title} className="portfolio-card">
+              <TiltCard className="group h-full" intensity={5}>
             <div
-              key={project.title}
-              className={`portfolio-card rounded-2xl p-6 border border-white/10 bg-gradient-to-br ${project.gradient} hover:border-white/20 transition-all duration-300 hover:-translate-y-1 group`}
+              className={`rounded-2xl p-6 border border-white/10 bg-gradient-to-br ${project.gradient} hover:border-white/20 transition-all duration-300 group h-full`}
             >
               <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                 {project.category}
@@ -130,6 +132,8 @@ export function Portfolio() {
                   </span>
                 ))}
               </div>
+            </div>
+              </TiltCard>
             </div>
           ))}
         </div>

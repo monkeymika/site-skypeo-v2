@@ -6,6 +6,7 @@ import { stagger as staggerContainer, fadeUp } from "@/lib/animations";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -92,9 +93,10 @@ export function Projects() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
+            <div key={project.client} className="project-card">
+              <TiltCard className="group h-full" intensity={5}>
             <div
-              key={project.client}
-              className="project-card glass-card p-8 relative overflow-hidden group"
+              className="glass-card p-8 relative overflow-hidden group h-full"
               style={{ borderColor: project.border }}
             >
               {/* Hover glow */}
@@ -131,6 +133,8 @@ export function Projects() {
                   ))}
                 </div>
               </div>
+            </div>
+              </TiltCard>
             </div>
           ))}
         </div>

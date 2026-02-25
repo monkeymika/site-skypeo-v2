@@ -79,12 +79,29 @@ export function ThreeBackground() {
       );
       geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
+      /* Circular sprite texture */
+      const sprite = document.createElement("canvas");
+      sprite.width = 32;
+      sprite.height = 32;
+      const ctx2d = sprite.getContext("2d")!;
+      const grad = ctx2d.createRadialGradient(16, 16, 0, 16, 16, 14);
+      grad.addColorStop(0, "rgba(255,255,255,1)");
+      grad.addColorStop(1, "rgba(255,255,255,0)");
+      ctx2d.beginPath();
+      ctx2d.arc(16, 16, 14, 0, Math.PI * 2);
+      ctx2d.fillStyle = grad;
+      ctx2d.fill();
+      const circleTexture = new THREE.CanvasTexture(sprite);
+
       const material = new THREE.PointsMaterial({
-        size: 0.18,
+        size: 0.28,
         vertexColors: true,
         transparent: true,
         opacity: 0.7,
         sizeAttenuation: true,
+        map: circleTexture,
+        alphaTest: 0.05,
+        depthWrite: false,
       });
 
       const points = new THREE.Points(geometry, material);
@@ -170,6 +187,7 @@ export function ThreeBackground() {
         renderer.dispose();
         geometry.dispose();
         material.dispose();
+        circleTexture.dispose();
         ringGeo.dispose();
         ringMat.dispose();
         if (mount.contains(renderer.domElement)) {

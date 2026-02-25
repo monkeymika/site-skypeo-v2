@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { TextReveal } from "@/components/ui/TextReveal";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -152,7 +153,8 @@ export default function AutomatisationsPage() {
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {useCases.map((u) => (
-              <div key={u.n} className="usecase-card group glass-card p-7 flex flex-col">
+              <TiltCard key={u.n} intensity={5} className="usecase-card h-full">
+              <div className="group glass-card p-7 flex flex-col h-full">
                 <div className="flex items-start justify-between mb-4">
                   <span className="font-bebas text-3xl gradient-text">{u.n}</span>
                   <span className="px-2.5 py-1 rounded-full text-[10px] font-bold border border-[#008f78]/25 text-[#008f78] bg-[#008f78]/10">
@@ -168,6 +170,7 @@ export default function AutomatisationsPage() {
                 </h3>
                 <p className="text-sm fg-3 leading-relaxed flex-1">{u.desc}</p>
               </div>
+              </TiltCard>
             ))}
           </div>
         </div>

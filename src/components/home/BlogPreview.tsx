@@ -5,6 +5,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -81,6 +82,7 @@ export function BlogPreview() {
         <div className="blog-grid grid md:grid-cols-2 gap-5">
           {posts.map((p) => (
             <div key={p.slug} className="blog-card">
+              <TiltCard className="h-full" intensity={5}>
               <Link
                 href={`/blog/${p.slug}`}
                 className="group block glass-card p-7 h-full"
@@ -116,6 +118,7 @@ export function BlogPreview() {
                   </span>
                 </div>
               </Link>
+              </TiltCard>
             </div>
           ))}
         </div>

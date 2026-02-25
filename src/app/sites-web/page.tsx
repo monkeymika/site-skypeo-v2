@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { TextReveal } from "@/components/ui/TextReveal";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -259,10 +260,8 @@ export default function SitesWebPage() {
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((f) => (
-              <div
-                key={f.n}
-                className="feature-card glass-card p-7 flex flex-col gap-3"
-              >
+              <TiltCard key={f.n} intensity={5} className="feature-card h-full">
+              <div className="glass-card p-7 flex flex-col gap-3 h-full">
                 <span className="font-bebas text-3xl gradient-text">{f.n}</span>
                 <h3
                   className="font-bebas fg-1"
@@ -272,6 +271,7 @@ export default function SitesWebPage() {
                 </h3>
                 <p className="text-sm fg-3 leading-relaxed">{f.desc}</p>
               </div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -376,9 +376,9 @@ export default function SitesWebPage() {
           </motion.div>
           <div className="grid md:grid-cols-3 gap-5">
             {offers.map((o) => (
+              <TiltCard key={o.name} intensity={4} className="pricing-card h-full">
               <div
-                key={o.name}
-                className={`pricing-card relative flex flex-col p-8 rounded-2xl ${o.highlight ? "text-white" : "glass-card"}`}
+                className={`relative flex flex-col p-8 rounded-2xl h-full ${o.highlight ? "text-white" : "glass-card"}`}
                 style={o.highlight ? { background: "linear-gradient(135deg, #008f78 0%, #2b3475 100%)" } : {}}
               >
                 {o.highlight && (
@@ -414,6 +414,7 @@ export default function SitesWebPage() {
                   {o.highlight ? o.cta : <span>{o.cta}</span>}
                 </Link>
               </div>
+              </TiltCard>
             ))}
           </div>
         </div>
