@@ -246,7 +246,7 @@ export function Navbar() {
                               ? "gradient-text"
                               : "text-white/60 group-hover:text-white"
                           }`}
-                          style={{ fontSize: "clamp(2.4rem, 6.5vw, 4.2rem)" }}
+                          style={{ fontSize: "clamp(2rem, 6.5vw, 4.2rem)" }}
                         >
                           {label}
                         </span>
